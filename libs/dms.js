@@ -15,7 +15,12 @@ const _statuses = [
 class DMS {
   constructor({ region }) {
     this.region = region;
-    this.client = new AWS.DMS({ region })
+     
+    this.client = new AWS.DMS({ 
+      region,
+      accessKeyId: AWS.config.accessKeyId || process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: AWS.config.secretAccessKey || process.env.AWS_SECRET_ACCESS_KEY,
+    });
   }
 
   static get statuses() {
